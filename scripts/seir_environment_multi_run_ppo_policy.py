@@ -16,7 +16,6 @@
 
 import argparse
 from pathlib import Path
-import re
 
 from gym.envs.registration import register, make
 import numpy as np
@@ -37,18 +36,11 @@ parser.add_argument("--flux", type=Path, required=True)
 parser.add_argument("--R0", type=float, required=True)
 parser.add_argument("--runs", type=int, required=True)
 parser.add_argument("--paths", nargs="+", type=Path, required=True)
-parser.add_argument("--n_districts", type=int, required=True)
 
 args = parser.parse_args()
 
-DISTRICTS_GROUP = None
-if args.n_districts == 11:
-    DISTRICTS_GROUP = ["Cornwall", "Plymouth", "Torbay", "East Devon", "Exeter", "Mid Devon",
-                       "North Devon", "South Hams", "Teignbridge", "Torridge", "West Devon"]
-elif args.n_districts == 3:
-    DISTRICTS_GROUP = ["Cornwall", "West Devon", "Plymouth"]
-else:
-    raise ValueError("Wrong number of districts. Should be 3 or 11.")
+DISTRICTS_GROUP = ["Cornwall", "Plymouth", "Torbay", "East Devon", "Exeter", "Mid Devon",
+                   "North Devon", "South Hams", "Teignbridge", "Torridge", "West Devon"]
 
 n_weeks = 43
 granularity = Granularity.WEEK

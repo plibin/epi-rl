@@ -36,7 +36,6 @@ parser.add_argument("--flux", type=Path, required=True)
 parser.add_argument("--R0", type=float, required=True)
 parser.add_argument("--runs", type=int, required=True)
 parser.add_argument("--path", type=Path, required=True)
-parser.add_argument("--n_districts", type=int, required=True)
 
 args = parser.parse_args()
 
@@ -49,14 +48,8 @@ def districts_susceptibles(env, districts_ids):
 def total_school_closures(env):
     return env.unwrapped.total_closures
 
-DISTRICTS_GROUP = None
-if args.n_districts == 11:
-    DISTRICTS_GROUP = ["Cornwall", "Plymouth", "Torbay", "East Devon", "Exeter", "Mid Devon",
-                       "North Devon", "South Hams", "Teignbridge", "Torridge", "West Devon"]
-elif args.n_districts == 3:
-    DISTRICTS_GROUP = ["Cornwall", "West Devon", "Plymouth"]
-else:
-    raise ValueError("Wrong number of districts. Should be 3 or 11.")
+DISTRICTS_GROUP = ["Cornwall", "Plymouth", "Torbay", "East Devon", "Exeter", "Mid Devon",
+                   "North Devon", "South Hams", "Teignbridge", "Torridge", "West Devon"]
 
 N_WEEKS = 43
 GRANULARITY = Granularity.WEEK

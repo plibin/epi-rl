@@ -50,9 +50,6 @@ parser.add_argument("--n_minibatches", type=int, default=4)
 parser.add_argument("--n_steps", type=int, default=128)
 parser.add_argument("--max_grad_norm", type=float, default=None)
 parser.add_argument("--clip_range", type=float, default=0.2)
-
-parser.add_argument("--n_districts", choices=["3", "11"], required=True)
-
 parser.add_argument("--total_timesteps", type=int, required=True)
 
 args = parser.parse_args()
@@ -77,11 +74,8 @@ register(id="SEIRmulti-v0",
                      model_seed=args.district_name,
                      budget_per_district_in_weeks=args.budget_in_weeks))
 
-if args.n_districts == "11":
-    districts_group = ["Cornwall", "Plymouth", "Torbay", "East Devon", "Exeter", "Mid Devon",
-                       "North Devon", "South Hams", "Teignbridge", "Torridge", "West Devon"]
-elif args.n_districts == "3":
-    districts_group = ["Cornwall", "West Devon", "Plymouth"]
+districts_group = ["Cornwall", "Plymouth", "Torbay", "East Devon", "Exeter", "Mid Devon",
+                   "North Devon", "South Hams", "Teignbridge", "Torridge", "West Devon"]
 
 env = make("SEIRmulti-v0")
 
