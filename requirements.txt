@@ -1,0 +1,9 @@
+numpy
+gym
+pandas
+matplotlib
+numba
+stable-baselines
+seaborn>=0.9.0
+scipy
+tensorflow<2.0.0
