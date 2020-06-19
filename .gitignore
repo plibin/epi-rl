@@ -1,0 +1,9 @@
+*.pyc
+*.DS_Store
+.mypy_cache
+.vscode
+.ipynb_checkpoints
+*.ipynb
+__pycache__
+*.srctrl*
+results
