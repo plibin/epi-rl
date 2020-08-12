@@ -96,15 +96,12 @@ class SEIREnvironment(Env):
         max_seir_value = np.max(self._model.seir_state)
         seir_highs_per_agent = np.full((seir_values_per_agent,), max_seir_value, dtype=np.float32)
         to_concat_per_agent = [seir_highs_per_agent]
-        to_concat = [np.tile(seir_highs_per_agent, self.n_districts)]
         if self.start_budget_per_district_in_weeks is not None:
             max_budget = self.start_budget_per_district_in_weeks * \
                 (7 if self.step_granularity == Granularity.DAY else 1)
             to_concat_per_agent.append([max_budget])
-            to_concat.append(np.full((self.n_districts,),
-                                     max_budget))
         highs_per_agent = np.concatenate(to_concat_per_agent, axis=0)
-        highs = np.concatenate(to_concat, axis=0)
+        highs = np.tile(highs_per_agent, self.n_districts)
         self.observation_space = spaces.Box(low=lows,
                                             high=highs)
         # Action can only be 0 or 1 for every district, i.e. close or open schools in that district
